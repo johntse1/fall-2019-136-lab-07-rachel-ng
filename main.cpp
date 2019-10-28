@@ -15,7 +15,9 @@ int main() {
     //std::string code = receiveInput(std::cin);
     //std::cout << code << std::endl;
     std::string name, code;
-    std::cin >> name;
+    //std::cin >> name;
+    name = "code.txt";
+    std::cout << name << std::endl;
     code = receiveFile(name);
     std::cout << indent(code) << std::endl;
     
