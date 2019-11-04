@@ -53,7 +53,7 @@ std::string indent (std::string code) {
     int indent = 0;
     std::istringstream lines(code);
     while(std::getline(lines, s)) {
-        std::string copy = 
+        std::string copy =;
         if(copy.find("/*")!=std::string::npos){
           while(copy.find("*/")!=std::string::npos){
                 std::cout << copy << std::endl;
@@ -74,7 +74,13 @@ bool isInQoute(std::string input) {
     std::string copy = input;
     if(input.find("\"")!=std::string::npos)
     {
-      input.find("\"")=start;
+      for(int i=0; i < input.length(); i++)
+      {
+        if(input[i]=="\"")
+        {
+          start = i;
+        }
+      }
       copy = copy.substr(start,input.length()-1);
       end = input.find("\"");
     }
