@@ -53,43 +53,19 @@ std::string indent (std::string code) {
     int indent = 0;
     std::istringstream lines(code);
     while(std::getline(lines, s)) {
-        std::string copy =;
+        std::string copy =s;
         if(copy.find("/*")!=std::string::npos){
-          while(copy.find("*/")!=std::string::npos){
+          while(copy.find("*/")==std::string::npos){
                 std::cout << copy << std::endl;
                 std::getline(lines, s);
           }
         }
+        else {
         std::string r = removeLeadingSpaces(s);
         int c = r[0] == '}' ? 1 : 0;
         indented += tabs(indent - c) + r + "\n";
         indent += countChar(r,'{') - countChar(r,'}');
+      }
     }
     return indented;
-}
-
-bool isInQoute(std::string input) {
-    int start = 0;
-    int end = 0;
-    std::string copy = input;
-    if(input.find("\"")!=std::string::npos)
-    {
-      for(int i=0; i < input.length(); i++)
-      {
-        if(input[i]=="\"")
-        {
-          start = i;
-        }
-      }
-      copy = copy.substr(start,input.length()-1);
-      end = input.find("\"");
-    }
-    for(int i = start; i < end; i++)
-    {
-      if(copy[i]=='{')
-      {
-        return true;
-      }
-    }
-    return false;
 }
